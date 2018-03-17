@@ -1,0 +1,2 @@
+DB_TABLE_NAME1 = ''
+DB_TABLE_NAME2 = ''

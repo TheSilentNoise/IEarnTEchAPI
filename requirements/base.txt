@@ -1,0 +1,17 @@
+# Flask setup http://flask.pocoo.org/
+Flask==0.12.2
+
+# https://flask-restful.readthedocs.io/en/latest/
+Flask-RESTful==0.3.6
+
+# https://pypi.python.org/pypi/uWSGI
+uWSGI==2.0.15
+
+flask-restful-swagger==0.19
+
+Sphinx==1.6.5
+sphinx-rtd-theme==0.2.4
+pymysql
+
+python-dotenv==0.7.1
+jsonschema==2.6.0
