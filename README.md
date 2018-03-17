@@ -5,7 +5,7 @@
 Clone the repo
 
 ```
-$ git clone https://github.com/TheSilentNoise/flaskApi-boilerplate.git
+$ git clone https://github.com/TheSilentNoise/IEarnTEchAPI.git
 $ cd flask-boilerplate
 ```
 
