@@ -6,6 +6,7 @@ import datetime
 import uuid
 from commons.utils import return_result
 import pymysql
+from werkzeug.security import generate_password_hash,check_password_hash
 import re
 
 from config.config import (
@@ -35,11 +36,36 @@ class Queries:
             row = dict(zip(columns,row))
             data.append(row)
         self.conn.close()
-        #print(data)
 
-        num_fields = len(self.cursor.description)
-        field_names = [i[0] for i in self.cursor.description]
-        #print(field_names)
-        #   print(num_fields)
+        #print(data[0]['user_password'])
+
+        return data
+
+    def changeUserPassword(self,userId):
+
+        jsonData = request.json
+
+        oldPassword = jsonData['oldPassword']
+        self.cursor = self.conn.cursor()
+        queryString = "select user_password from user where id ="+str(userId)
+        print(queryString)
+        self.cursor.execute(queryString)
+        dbPassword = self.cursor.fetchone()
+        strPassword=(''.join(dbPassword))
+
+        hashedPassword = check_password_hash(strPassword,oldPassword)
+        print(hashedPassword)
+        if(hashedPassword):
+            newPassword = jsonData['newPassword']
+            hashedNewPassword = generate_password_hash(newPassword,method='sha256')
+            queryString = "Update user SET user_password='"+hashedNewPassword+"' WHERE id="+str(userId)
+            print(queryString)
+            self.cursor.execute(queryString)
+            self.conn.commit()
+            data = "Password Updated Sucessfully"
+        else:
+            data = "Password do not match"
+
+        self.conn.close()
 
         return data
