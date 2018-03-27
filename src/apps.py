@@ -19,4 +19,4 @@ api.add_resource(UserDetails,'/IEarn-Tech/api/v1/users')
 api.add_resource(ChangePassword,'/IEarn-Tech/api/v1/users/<int:userId>/changePassword')
 
 if __name__ == '__main__':
-    app.run(debug=True, host= '0.0.0.0', port=8000)
+    app.run(debug=True, host= '0.0.0.0', port=8000, threaded=True)
