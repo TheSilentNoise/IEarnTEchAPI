@@ -3,6 +3,7 @@ from flask_restful import Api
 from flask_restful_swagger import swagger
 from resources.Users_Resource import UserDetails
 from resources.UserPassword_Resource import ChangePassword
+from resources.UserEnrollment_Resource import UserEnrollment
 
 app = Flask(__name__)
 api = swagger.docs(
@@ -17,6 +18,7 @@ def hello():
 
 api.add_resource(UserDetails,'/IEarn-Tech/api/v1/users')
 api.add_resource(ChangePassword,'/IEarn-Tech/api/v1/users/<int:userId>/changePassword')
+api.add_resource(UserEnrollment,'/IEarn-Tech/api/v1/usersEnrollment')
 
 if __name__ == '__main__':
     app.run(debug=True, host= '0.0.0.0', port=8000, threaded=True)

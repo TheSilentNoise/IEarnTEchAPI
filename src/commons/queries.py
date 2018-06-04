@@ -29,6 +29,12 @@ class Queries:
         data = []
         self.cursor = self.conn.cursor()
         queryString = "select * from user"
+        '''queryString = "select u.id,u.user_fname,u.user_lname,enrl.course_name," \
+                      "u.user_phoneno,u.user_email,enrl.date_created from " \
+                      "(select uc.user_id,c.id,uc.date_created,course_name from " \
+                      "courses c join user__course uc on c.id=uc.course_id)enrl " \
+                      "join user u ON u.id=enrl.user_id order by u.id"
+                      '''
         self.cursor.execute(queryString)
         rows = self.cursor.fetchall()
         columns = [desc[0] for desc in self.cursor.description]
@@ -38,6 +44,28 @@ class Queries:
         self.conn.close()
 
         #print(data[0]['user_password'])
+        #select u.id,u.user_fname,u.user_lname,enrl.course_name from (select uc.user_id,c.id,course_name from courses c join user__course uc on c.id=uc.course_id)enrl join user u ON u.id=enrl.user_id
+        #print(data)
+
+        return data
+
+    def userEnroll(self):
+        data = []
+        self.cursor = self.conn.cursor()
+        queryString = "select u.id,u.user_fname,u.user_lname,enrl.course_name," \
+                      "u.user_phoneno,u.user_email,enrl.date_created from " \
+                      "(select uc.user_id,c.id,uc.date_created,course_name from " \
+                      "courses c join user__course uc on c.id=uc.course_id)enrl " \
+                      "join user u ON u.id=enrl.user_id order by u.id"
+        self.cursor.execute(queryString)
+        rows = self.cursor.fetchall()
+        columns = [desc[0] for desc in self.cursor.description]
+        for row in rows:
+            row = dict(zip(columns,row))
+            data.append(row)
+        self.conn.close()
+
+        #print(data)
 
         return data
 
