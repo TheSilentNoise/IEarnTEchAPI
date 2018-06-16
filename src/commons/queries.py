@@ -28,7 +28,7 @@ class Queries:
     def listUsers(self):
         data = []
         self.cursor = self.conn.cursor()
-        queryString = "select * from user"
+        queryString = "select * from user order by id DESC limit 10"
         '''queryString = "select u.id,u.user_fname,u.user_lname,enrl.course_name," \
                       "u.user_phoneno,u.user_email,enrl.date_created from " \
                       "(select uc.user_id,c.id,uc.date_created,course_name from " \
